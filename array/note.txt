@@ -1,0 +1,20 @@
+Defining Array Values
+=============================
+array_name[index]=value
+OR
+array_name=(value1 value2)
+
+Example:
+NAME[0]="Touhid"
+NAME[1]="Rifa"
+NAME[2]="Nabila"
+NAME[3]="Riddhi"
+NAME[4]="Bithi"
+
+MYFRND=("Rifa" "Nabila" "Riddhi")
+
+Accessing Array Values
+========================
+${array_name[index]}
+Example:
+echo "${NAME[0]}"
