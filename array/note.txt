@@ -11,6 +11,8 @@ NAME[2]="Nabila"
 NAME[3]="Riddhi"
 NAME[4]="Bithi"
 
+OR
+
 MYFRND=("Rifa" "Nabila" "Riddhi")
 
 Accessing Array Values
