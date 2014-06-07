@@ -15,6 +15,8 @@ OR
 
 MYFRND=("Rifa" "Nabila" "Riddhi")
 
+
+
 Accessing Array Values
 ========================
 ${array_name[index]}
