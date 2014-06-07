@@ -36,3 +36,16 @@ Unsetting Variables
 ===================
 MIA="Touhid Mia"
 unset MIA
+
+
+Special Type of Variables
+=============================
+$0  :   The filename of the current script.
+$n  :   Here n is a positive decimal number corresponding to the position of an argument (the first argument is $1, the second argument is $2, and so on).
+$#  :   The number of arguments supplied to a script.
+$*  :   Shows all arguments
+$@  :   Shows all arguments
+$?  :   The exit status of the last command executed.
+$$  :   The process number of the current shell
+$!  :   The process number of the last background command.
+
