@@ -1,0 +1,38 @@
+Create Variables
+=========================
+The name of a variable can contain only
+1. letters ( a to z or A to Z)
+2. numbers ( 0 to 9)
+3. the underscore character ( _)
+First character not be a number
+
+
+Variable Types
+===============
+1. Local Variables: A local variable is a variable that is present within the current instance of the shell.
+2. Environment Variables: An environment variable is a variable that is available to any child process of the shell.
+3. Shell Variables: A shell variable is a special variable that is set by the shell and is required by the shell in order to function correctly.
+
+
+Defining Variables
+=====================
+variable_name=variable_value
+Example: MIA="Touhid Mia"
+
+
+Accessing Values:
+====================
+MIA="Touhid Mia"
+echo $MIA
+
+
+Read-only Variables
+=======================
+MIA="Touhid Mia"
+readonly MIA
+
+
+Unsetting Variables
+===================
+MIA="Touhid Mia"
+unset MIA
