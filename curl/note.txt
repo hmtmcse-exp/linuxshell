@@ -1,0 +1,16 @@
+Wait until tomcat finishes starting up
+========================================
+until [ "`curl --silent --show-error --connect-timeout 1 -I http://localhost:8080 | grep 'Coyote'`" != "" ];
+do
+  echo --- sleeping for 10 seconds
+  sleep 10
+done
+
+echo Tomcat is ready!
+
+
+Here
+==============
+--silent            :   Silent mode. Don’t show progress meter or error messages. Makes Curl mute.
+--show-error        :   When used with -s it makes curl show error message if it fails.
+--connect-timeout   :   Maximum time in seconds that you allow the connection to the server to take.
