@@ -1,0 +1,52 @@
+
+************************************************************************************************************************
+*                                                   IF_FI
+************************************************************************************************************************
+if [ expression ]
+then
+   Statement(s) to be executed if expression is true
+fi
+
+
+
+************************************************************************************************************************
+*                                               IF_ELSE_FI
+************************************************************************************************************************
+if [ expression ]
+then
+   Statement(s) to be executed if expression is true
+else
+   Statement(s) to be executed if expression is not true
+fi
+
+
+
+************************************************************************************************************************
+*                                              IF_ELIF_FI
+************************************************************************************************************************
+if [ expression 1 ]
+then
+   Statement(s) to be executed if expression 1 is true
+elif [ expression 2 ]
+then
+   Statement(s) to be executed if expression 2 is true
+else
+   Statement(s) to be executed if no expression is true
+fi
+
+
+
+************************************************************************************************************************
+*                                                       CASE
+************************************************************************************************************************
+case word in
+  pattern1)
+     Statement(s) to be executed if pattern1 matches
+     ;;
+  pattern2)
+     Statement(s) to be executed if pattern2 matches
+     ;;
+  pattern3)
+     Statement(s) to be executed if pattern3 matches
+     ;;
+esac
