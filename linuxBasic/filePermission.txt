@@ -1,0 +1,69 @@
+File Have 3 Groups permission
+1. Owner permissions        :   The owner's permissions determine what actions the owner of the file can perform on the file.
+2. Group permissions        :   The group's permissions determine what actions a user, who is a member of the group that a file belongs to, can perform on the file.
+3. Other(world) permissions :    The permissions for others indicate what action all other users can perform on the file.
+
+Number of permission or access modes:
+1. (r) Read permission      :   Grants the capability to read
+2. (w) Write permission     :   Grants the capability to modify
+3. (x) Execute permission   :   User with execute permissions can run a file as a program.
+
+ls -l   : Shows permissions
+Example :
+------------------------------------------------------------------------------------------------------------------------
+-rwx-rwx--rwx--    1 H.M.Touh Administ       59 Jun  7 22:49 push
+------------------------------------------------------------------------------------------------------------------------
+owner-group-other  First permission for owner, Second for Group, last for other
+------------------------------------------------------------------------------------------------------------------------
+
+
+Using chmod with Absolute Permissions:
+
+---------|------------------------------------------------------------------|-------------------------------------------
+    0       No permission                                                       ---
+---------|------------------------------------------------------------------|-------------------------------------------
+    1       Execute permission                                                  --x
+---------|------------------------------------------------------------------|-------------------------------------------
+    2       Write permission                                                    -w-
+---------|------------------------------------------------------------------|-------------------------------------------
+    3       Execute and write permission    :   1   +   2   =   3               -wx
+---------|------------------------------------------------------------------|-------------------------------------------
+    4       Read permission                                                     r--
+---------|------------------------------------------------------------------|-------------------------------------------
+    5       Read and execute permission     :   4   +   1   =   5               r-x
+---------|------------------------------------------------------------------|-------------------------------------------
+    6       Read and write permission       :   4   +   2   =   6               rw-
+---------|------------------------------------------------------------------|-------------------------------------------
+    7       All permissions                 :   4   +   2   +   3   =   7       rwx
+---------|------------------------------------------------------------------|-------------------------------------------
+
+
+
+Changing Owners and Groups
+chown       :   The chown command stands for "change owner" and is used to change the owner of a file.
+chgrp       :   The chgrp command stands for "change group" and is used to change the group of a file.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
