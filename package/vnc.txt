@@ -1,0 +1,49 @@
+Query For VNS
+------------------
+rpm -q vnc-server
+
+
+Install VNC SERVER
+-------------------
+yum install vnc-server
+
+
+Install VNC CLIENT
+-------------------
+yum install vnc
+
+
+
+We will perform the following steps to configure our VNC server:
+
+1. Create the VNC users accounts.
+    useradd touhid
+    passwd touhid
+
+
+2. Edit the server configuration.
+   vim /etc/sysconfig/vncservers
+
+   Add Following Configuration
+   VNCSERVERS="1:touhid"
+   VNCSERVERARGS[1]="-geometry 640x480"
+
+3. Set your users' VNC passwords.
+    su touhid
+    vncpasswd
+
+
+4. Confirm that the vncserver will start and stop cleanly.
+    service vncserver start
+    service vncserver stop
+    chkconfig vncserver on
+
+
+Create and customize xstartup scripts.
+6. Amend the iptables.
+
+
+
+Start the VNC service.
+Test each VNC user.
+Additional optional enhancements
