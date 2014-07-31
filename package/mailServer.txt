@@ -1,0 +1,48 @@
+Host: miaisoft.net
+Email: mail.miaisoft.net
+
+
+Install Postfix
+************************
+vim /etc/postfix/main.cf
+=========================
+line 75     :   myhostname = mail.miaisoft.net
+line 83     :   mydomain = miaisoft.net
+line 99     :   myorigin = $mydomain
+line 116    :   inet_interfaces = all
+line 164    :   mydestination = $myhostname, localhost.$mydomain, localhost
+line 264    :   mynetworks = 192.168.0.0/28, 127.0.0.0/8
+line 419    :   home_mailbox = Maildir/
+
+
+Add User
+=================
+useradd -m touhid -s /sbin/nologin
+passwd touhid
+
+
+
+Install Dovecot
+*******************
+vim /etc/dovecot/dovecot.conf
+==============================
+line 20     :   protocols = imap pop3 lmtp
+
+
+vim /etc/dovecot/conf.d/10-mail.conf
+=======================================
+line 24     :    mail_location = maildir:~/Maildir
+
+
+vim /etc/dovecot/conf.d/10-auth.conf
+======================================
+line 9      :   disable_plaintext_auth = no
+line 97     :   auth_mechanisms = plain login
+
+
+
+vim /etc/dovecot/conf.d/10-master.conf
+======================================
+line 82     :   mode = 0600
+line 83     :   user = postfix
+line 84     :   group = postfix
