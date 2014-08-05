@@ -47,3 +47,11 @@ Create and customize xstartup scripts.
 Start the VNC service.
 Test each VNC user.
 Additional optional enhancements
+
+
+
+
+
+For GNOME UI
+===============
+yum groupinstall Desktop
