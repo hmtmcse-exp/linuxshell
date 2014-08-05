@@ -1,0 +1,35 @@
+vim /etc/sysconfig/network
+================================
+NETWORKING=yes
+HOSTNAME=mail.miaisoft.com
+GATEWAY=192.168.0.254
+
+
+vim /etc/sysconfig/network-scripts/ifcfg-eth0
+===============================================
+DEVICE=eth0
+HWADDR=08:00:27:0C:0C:3F
+TYPE=Ethernet
+UUID=5020362f-05e9-4e76-80a8-f0667646c635
+ONBOOT=yes
+NM_CONTROLLED=yes
+BOOTPROTO=static
+IPADDR=192.168.0.50
+NETMASK=255.255.255.0
+IPV6INIT=no
+USERCTL=no
+
+
+vim /etc/resolv.conf
+========================
+search miaisoft.net
+nameserver 192.168.0.254
+nameserver 8.8.8.8
+nameserver 4.2.2.2
+
+
+Veriry Network Setup
+=====================
+# ifconfig eth0
+# route -n
+# ping google.com
