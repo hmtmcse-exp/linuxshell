@@ -1,0 +1,147 @@
+Configuration Example:
+=================================
+NameVirtualHost 192.168.0.1:80
+
+<VirtualHost 192.168.0.1:80>
+        ServerName miaisoft.com
+	    ServerAlias www.miaisoft.com
+        ServerAdmin support@miaisoft.com
+        DocumentRoot  /var/www/html
+
+        <Directory  /var/www/html>
+                Options FollowSymLinks
+                Allow from all
+                AllowOverride All
+                Order allow,deny
+        </Directory>
+
+</VirtualHost>
+
+------------------------------------------------------------------------------------------------------------------------
+NameVirtualHost:
+"""""""""""""""""
+The NameVirtualHost directive is a required directive if we want to configure name-based virtual hosts.
+Example:
+NameVirtualHost 192.168.0.1:80
+------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+ServerName:
+"""""""""""""""""
+Hostname and port that the server uses to identify itself
+Syntax:
+ServerName [scheme://]fully-qualified-domain-name[:port]
+Example:
+ServerName miaisoft.com
+------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+ServerAlias:
+"""""""""""""""""
+Alternate names for a host used when matching requests to name-virtual hosts
+Syntax:
+ServerAlias hostname [hostname] ...
+Example:
+ServerAlias server miaisoft.com server2
+ServerAlias *.miaisoft.com
+------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+ServerAdmin:
+"""""""""""""""""
+Email address that the server includes in error messages sent to the client
+Syntax:
+ServerAdmin email-address|URL
+Example:
+ServerAdmin support@miaisoft.com
+------------------------------------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------------------------------------
+DocumentRoot:
+"""""""""""""""""
+Directory that forms the main document tree visible from the web.
+Syntax:
+DocumentRoot directory-path
+Example:
+DocumentRoot /var/www/html
+------------------------------------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------------------------------------
+<VirtualHost>:
+"""""""""""""""""
+Contains directives that apply only to a specific hostname or IP address
+Syntax:
+<VirtualHost addr[:port] [addr[:port]] ...> ... </VirtualHost>
+Example:
+<VirtualHost 10.1.2.3:80>
+<VirtualHost [2001:db8::a00:20ff:fea7:ccea]:80>
+------------------------------------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------------------------------------
+<Directory>:
+"""""""""""""""""
+Enclose a group of directives that apply only to the named file-system directory, sub-directories, and their contents
+Syntax:
+<Directory directory-path> ... </Directory>
+Example:
+<Directory  /var/www/html>
+------------------------------------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------------------------------------
+Options FollowSymLinks:
+"""""""""""""""""
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+Example:
+XXXXXXXXXXXXXXXXX
+------------------------------------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------------------------------------
+Allow from all:
+"""""""""""""""""
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+Example:
+XXXXXXXXXXXXXXXXX
+------------------------------------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------------------------------------
+AllowOverride:
+"""""""""""""""""
+Types of directives that are allowed in .htaccess files
+Syntax:
+AllowOverride All|None|directive-type [directive-type] ...
+Example:
+AllowOverride None
+
+Note:
+1. When this directive is set to None, then .htaccess files are completely ignored.
+2. When this directive is set to All, then any directive which has the .htaccess Context is allowed in .htaccess files.
+------------------------------------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------------------------------------
+Order allow,deny:
+"""""""""""""""""
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+Example:
+XXXXXXXXXXXXXXXXX
+------------------------------------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------------------------------------
+Options:
+"""""""""""""""""
+Configures what features are available in a particular directory
+Syntax:
+Options [+|-]option [[+|-]option] ...
+Example:
+Options FollowSymLinks
+
+Note:
+1. All                      :   All options except for MultiViews. This is the default setting.
+2. FollowSymLinks           :   The server will follow symbolic links in this directory.
+3.
+------------------------------------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------------------------------------
+Notes:
+1. Allow from All           :   This means that Apache will serve any file mapped from an URL.
+------------------------------------------------------------------------------------------------------------------------
+
+
+
+
