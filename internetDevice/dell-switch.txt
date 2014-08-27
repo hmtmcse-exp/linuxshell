@@ -1,0 +1,359 @@
+1. show vlan            :   showing all vlan
+2. configure/config     :   got configure mode
+3. vlan database        :   for vlan database;
+
+
+
+Creating VLANs
+console> enable
+console# config
+console(config)# vlan database
+console(config-vlan)# vlan 2
+console(config-vlan)# exit
+console(config)# interface vlan 2
+console(config-if)# name Marketing
+console(config-if)# end
+
+
+Removing VLANs
+console> enable
+console# config
+console(config)# vlan database
+console(config-vlan)# no vlan 2
+
+
+
+
+
+Ports can be disabled using the following commands:
+console# config
+console(config)# interface ethernet g5
+console(config-if)# shutdown
+
+
+
+Enable a port using the following command:
+console(config-if)# no shutdown
+
+
+
+Creating LAGs – Static Two-port LAG
+console> enable
+console# configure
+console(config)# interface range ethernet g1-2
+console(config-if)# channel-group 1 mode on
+console(config-if)# exit
+console(config)#
+
+
+
+Creating LAGs – Dynamic LACP LAG
+console> enable
+console# configure
+
+console(config)# interface range ethernet g1-2
+
+console(config-if)# channel-group 1 mode auto
+
+console(config-if)# exit
+
+console(config)#
+
+
+
+
+Change Management VLAN
+console > enable
+console# configure
+console(config)#ip address vlan 5
+
+
+
+
+
+
+
+Remove Port From VLAN
+console> enable
+console# config
+console(config)# interface ethernet 1/e1
+console(config-if)# switchport access vlan 1
+
+
+
+VLAN routing
+
+console#config
+
+console(config)#ip routing
+
+console(config)#interface vlan 2
+
+console(config-if-vlan2)#routing
+
+console(config-if-vlan2)#exit
+
+
+
+Creating Static Routes
+
+console> enable
+
+console# config
+
+console(config)# ip route 172.16.0.0 255.255.0.0 10.0.0.2
+
+console(config)# end
+
+console#
+
+
+
+ Configure LLDP – Marvell-based Switch
+
+console> enable
+
+console# config
+
+console(config)# interface range ethernet 1/e5-10
+
+console(config-if)# lldp optional-tlv port-desc sys-name sys-desc sys-cap
+
+console(config-if)# end
+
+console#
+
+
+
+Configure LLDP – 62xx Series
+
+console>enable
+
+console#config
+
+console(config)#lldp notification-interval 10
+
+console(config)#interface range ethernet 1/g1-1/g24
+
+console(config-if)#lldp transmit-tlv port-desc sys-name sys-desc sys-cap
+
+console(config-if)#lldp transmit-mgmt
+
+console(config-if)#lldp notification
+
+console(config-if)#end
+
+console#
+
+
+
+
+
+Configure LLDP – 8024/8024F Series (v3.1.4.5 or later)
+
+console>enable
+
+console#config
+
+console(config)#lldp notification-interval 10
+
+console(config)#interface range ethernet 1/xg1-1/xg24
+
+
+
+console(config-if)#lldp transmit-tlv port-desc sys-name sys-desc sys-cap
+
+console(config-if)#lldp transmit-mgmt
+
+console(config-if)#lldp notification
+
+console(config-if)#end
+
+console#
+
+
+
+To configure Bridge priority for a Root Switch:
+
+console# config
+
+console(config)# spanning-tree priority 4096 ß Global config sets bridge priority
+
+console(config)# exit
+
+
+
+To configure Portfast on an interface:
+
+console# config
+
+console(config)# interface ethernet g5 ß this command will vary on different vendor platforms
+
+console(config-if)# spanning-tree portfast ß this enables Portfast on this port
+
+console(config-if)# exit
+
+
+
+To reset a switch to factory defaults use the following commands:
+
+delete startup-config or simply del start.
+
+Reload
+
+
+
+Snmp configuration Marvell-based switches:
+
+console# configure
+
+console(config)# snmp-server community public rw 172.16.0.24
+
+console(config)# snmp-server enable traps
+
+console(config)# snmp-server trap authentication
+
+console(config)# snmp-server host 172.16.0.24 public
+
+console(config)# snmp-server host 172.16.0.24 public traps 2
+
+console(config)# snmp-server host 172.16.0.24 public informs 2
+
+console(config)# snmp contact "John Smith"
+
+console(config)# snmp location "First Floor"
+
+
+
+Snmp configurationBroadcom-based switches:
+console# configure
+console(config)# snmp-server community public rw ip address 172.16.0.24
+console(config)# snmp-server enable traps all
+console(config)# snmp-server trap authentication
+console(config)# snmp-server host 172.16.0.24 public traps v2
+console(config)# snmp-server host 172.16.0.24 public informs
+console(config)# snmp contact "John Smith"
+console(config)# snmp location "First Floor"
+
+
+
+SNTP for unicast Marvel-based switches
+console(config)# clock source sntp
+console(config)# clock summer-time recurring usa zone CDT
+console(config)# clock timezone -6 zone CST
+console(config)# sntp unicast client enable
+console(config)# sntp server 10.37.112.13
+
+
+
+SNTP for unicast Broadcom-based switches
+console(config)# clock summer-time recurring usa zone CDT
+console(config)# clock timezone -6 zone CST
+console(config)# sntp unicast client enable
+console(config)# sntp server 10.37.112.13
+
+
+
+
+
+
+
+
+
+
+
+
+interface range ethernet all
+spanning-tree portfast
+exit
+interface range ethernet e(1-24)
+dot1x multiple-hosts authentication
+exit
+interface range ethernet g(1-4)
+switchport mode trunk
+exit
+vlan database
+vlan 2-6,9-11
+exit
+interface range ethernet g(1-4)
+switchport trunk allowed vlan add 2
+exit
+interface range ethernet g(1-4)
+switchport trunk allowed vlan add 3
+exit
+interface range ethernet g(1-4)
+switchport trunk allowed vlan add 4
+exit
+interface range ethernet g(1-4)
+switchport trunk allowed vlan add 5
+exit
+interface range ethernet g(1-4)
+switchport trunk allowed vlan add 6
+exit
+interface range ethernet g(1-4)
+switchport trunk allowed vlan add 9
+exit
+interface range ethernet g(1-4)
+switchport trunk allowed vlan add 10
+exit
+interface range ethernet g(1-4)
+switchport trunk allowed vlan add 11
+exit
+interface vlan 2
+name netman
+exit
+interface vlan 3
+name lt-sys
+exit
+interface vlan 4
+name pub-sys
+exit
+interface vlan 5
+name lt-clients
+exit
+interface vlan 6
+name guest
+exit
+interface vlan 9
+name lt-voip
+exit
+interface vlan 10
+name lt-print
+exit
+interface vlan 11
+name lt-wifi
+exit
+interface vlan 6
+dot1x guest-vlan
+exit
+dot1x system-auth-control
+interface range ethernet e(1-24)
+dot1x re-authentication
+exit
+interface range ethernet e(1-24)
+dot1x max-req 3
+exit
+interface range ethernet e(1-24)
+dot1x mac-authentication mac-and-802.1x
+exit
+interface range ethernet e(1-24)
+dot1x radius-attributes vlan
+exit
+interface range ethernet e(1-24)
+dot1x port-control auto
+exit
+interface range ethernet e(1-24)
+dot1x guest-vlan enable
+exit
+interface vlan 2
+ip address 10.58.2.99 255.255.255.0
+exit
+hostname sw-1-2
+radius-server host 10.58.2.128 key switch priority 2
+radius-server host 10.58.3.132 key switch priority 1
+aaa authentication dot1x default radius
+username bryan password password-hash-was-here level 15 encrypted
+clock source sntp
+sntp server 10.58.3.128 poll
+ip domain-name liketechnologies.local
+ip name-server  10.58.3.32 10.58.3.33
