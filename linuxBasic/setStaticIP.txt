@@ -27,6 +27,8 @@ nameserver 192.168.0.254
 nameserver 8.8.8.8
 nameserver 4.2.2.2
 
+sudo chattr +i /etc/resolv.conf
+
 
 Veriry Network Setup
 =====================

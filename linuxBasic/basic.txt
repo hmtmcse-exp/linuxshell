@@ -1,0 +1,19 @@
+ls -lah
+
+-l	Displays file types, owner, group, size, date and filename.	ls -l
+-a	Displays all files, including hidden files (suffixed with “.”).	ls -a
+-h	Displays files with human readable format, e.g. 1k, 100MB, 1G.	ls -h
+
+
+Install Chrome in CentOS
+===========================
+vim /etc/yum.repos.d/google-chrome.repo
+
+[google-chrome]
+name=google-chrome
+baseurl=http://dl.google.com/linux/chrome/rpm/stable/$basearch
+enabled=1
+gpgcheck=1
+gpgkey=https://dl-ssl.google.com/linux/linux_signing_key.pub
+
+yum install google-chrome-stable

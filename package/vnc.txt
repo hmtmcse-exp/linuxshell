@@ -33,7 +33,6 @@ We will perform the following steps to configure our VNC server:
     vncpasswd
 
 
-
 4. Confirm that the vncserver will start and stop cleanly.
     service vncserver start
     service vncserver stop
@@ -48,11 +47,3 @@ Create and customize xstartup scripts.
 Start the VNC service.
 Test each VNC user.
 Additional optional enhancements
-
-
-
-
-
-For GNOME UI
-===============
-yum groupinstall Desktop

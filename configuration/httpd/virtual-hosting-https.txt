@@ -1,0 +1,21 @@
+<VirtualHost 203.143.72.28:443>
+        ServerName swinburne2.southamstudios.com:443
+       ServerAdmin systems@webmascot.com
+        DocumentRoot /home/virtual/swinburne2.southamstudios.com/var/www/html
+        <Directory /home/virtual/swinburne2.southamstudios.com/var/www/html/>
+                Order deny,allow
+                Allow from all
+                AllowOverride All
+        </Directory>
+        Include /home/virtual/swinburne2.southamstudios.com/etc/httpd/conf.d/
+
+        SSLEngine on
+        SSLCipherSuite ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP
+        SetEnvIf User-Agent ".*MSIE.*" \
+                 nokeepalive ssl-unclean-shutdown \
+                 downgrade-1.0 force-response-1.0
+
+        SSLCertificateKeyFile /etc/pki/tls/private/swinburne2.southamstudios.com.key
+        SSLCertificateFile /etc/pki/tls/certs/swinburne2.southamstudios.com.crt
+        SSLCertificateChainFile /etc/pki/tls/certs/intermediate.crt
+</VirtualHost>

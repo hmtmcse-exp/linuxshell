@@ -1,0 +1,187 @@
+IRR     :   Internet Resources Registerer
+FQDN    :   Fully Qualified Domain Name
+BIND    :   Berkeyley Internet Name Domain
+DNS     :   Domain Name System
+
+Port
+========
+udp/tcp :   53
+rndc    :   953
+
+
+DNS Resource Record
+=======================
+A           :   Address record              :   Map hostnames to an IP address of the Host.
+CNAME       :   Canonical name record       :   Alias of one name to another
+MX          :   Mail exchange record        :   Maps a domain name to a list of message transfer agents for that domain
+PTR         :   Pointer record              :   Pointer to a canonical name.
+NS          :   Name server record          :   Delegates a DNS zone to use the given authoritative name servers
+SOA         :   Start of authority record   :   Specifies authoritative information about a DNS zone.
+TXT         :   Text record                 :   Originally for arbitrary human-readable text in a DNS record.
+
+
+
+
+Primary(Master) DNS Server Details:
+Host        :   mdns.miaisoft.net
+IP Address  :   192.168.0.10
+
+Secondary(Slave) DNS Server Details:
+Host        :   sdns.miaisoft.net
+IP Address  :   192.168.0.11
+
+
+
+
+yum install bind*
+
+vim /etc/named.conf
+========================
+line 11         :       192.168.0.10        //Add DNS server IP
+line 17         :       192.168.0.0/24      //Allow Query From
+
+
+
+
+zone file Forward zone file
+=============================
+$TTL	86400
+@		 SOA	     miaisoft.net.      root (
+					42		; serial (d. adams)
+					3H		; refresh
+					15M		; retry
+					1W		; expiry
+					1D )	; minimum
+
+@	        NS		dns.miaisoft.net.
+@			NS      mail.miaisoft.net.
+dns      	A       192.168.0.10
+mail		A		192.168.0.1
+
+
+Reverse zone file
+======================
+$TTL	86400
+@             SOA     miaisoft.net. (
+                                      1997022700 ; Serial
+                                      28800      ; Refresh
+                                      14400      ; Retry
+                                      3600000    ; Expire
+                                      86400 )    ; Minimum
+
+       	  IN	 NS      dns.miaisoft.net
+10        IN     PTR     dns.miaisoft.net.
+1         IN     PTR     mail.miaisoft.net.
+
+
+Step 1: vim /etc/named.conf
+============================================================================
+options {
+listen-on port 53 { 192.168.0.10; };
+        directory "/var/named";
+        dump-file "/var/named/data/cache_dump.db";
+        statistics-file "/var/named/data/named_stats.txt";
+        memstatistics-file "/var/named/data/named_mem_stats.txt";
+        recursion no;
+        allow-query { any; };
+        allow-query-cache { localhost; };
+        };
+logging {
+        channel default_debug {
+        file "data/named.run";
+        severity dynamic;
+        };
+};
+view localhost_resolver {
+        match-clients { any; };
+        match-destinations { 192.168.0.10; };
+        recursion yes;
+        include "/etc/named.rfc1912.zones";
+};
+
+
+Step 2 : vim /etc/named.rfc1912.zones
+======================================================================================
+zone "." IN {
+              type hint;
+              file "named.ca";
+};
+zone "miaisoft.net" IN {
+                 type master;
+                 file "forward.zone";
+                 allow-update { none; };
+};
+zone "localhost" IN {
+                 type master;
+                 file "localhost.zone";
+                 allow-update { none; };
+};
+zone "0.168.192.in-addr.arpa" IN {
+                 type master;
+                 file "reverse.zone";
+                 allow-update { none; };
+};
+
+Step 3: Change the permission : chgrp named /etc/named.conf
+=====================================================================================
+
+
+Step 4:
+=====================================================================================
+cd /var/named/chroot/var/named
+vim forward.zone
+---------------------------
+$TTL 86400
+@          IN     SOA    dns.miaisoft.net.  root.dns.miaisoft.net. (
+                         42 ; serial (d. adams)
+                         3H ; refresh
+                        15M ; retry
+                         1W ; expiry
+                         1D ) ; minimum
+          IN   NS     dns.miaisoft.net.
+dns       IN   A      192.168.0.10
+
+vim reverse.zone
+--------------------------
+$TTL 86400
+@        IN     SOA    dns.miaisoft.net.  root.dns.miaisoft.net. (
+                       1997022700 ; Serial
+                            28800 ; Refresh
+                            14400 ; Retry
+                          3600000 ; Expire
+                          86400 ) ; Minimum
+         IN   NS   dns.miaisoft.net.
+dns      IN   A      192.168.0.10
+10       IN   PTR  dns.miaisoft.net.
+
+chgrp named reverse.zone
+chgrp named forward.zone
+
+vim /etc/hosts
+----------------
+192.168.0.10 dns.miaisoft.net dns
+
+vim /etc/resolv.conf
+--------------------------
+search miaisoft.net
+namedserver 192.168.0.10
+
+
+
+Check DNS Service
+========================
+named-checkconf /etc/named.conf
+named-checkzone miaisoft.net /var/named/chroot/var/named/forward.zone
+named-checkzone miaisoft.net /var/named/chroot/var/named/reverse.zone
+
+Error Log
+=====================
+tail -f /var/log/messages
+
+
+Note
+=============
+1.  rndc-confgen -a -r /dev/urandom -t /var/named/chroot
+
+
+
