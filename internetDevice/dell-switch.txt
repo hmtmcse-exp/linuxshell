@@ -22,7 +22,14 @@ console(config)# vlan database
 console(config-vlan)# no vlan 2
 
 
+Add Port in VLAN
+==================
+config
+interface range ethernet g(9-16)
+switchport access vlan 2
 
+
+copy running-config startup-config
 
 
 Ports can be disabled using the following commands:
@@ -252,19 +259,6 @@ console(config)# clock timezone -6 zone CST
 console(config)# sntp unicast client enable
 console(config)# sntp server 10.37.112.13
 
-
-
-
-
-
-Add Port in VLAN
-==================
-config
-interface range ethernet g(9-16)
-switchport access vlan 2
-
-
-copy running-config startup-config
 
 
 
