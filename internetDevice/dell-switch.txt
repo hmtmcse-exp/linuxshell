@@ -257,9 +257,14 @@ console(config)# sntp server 10.37.112.13
 
 
 
+Add Port in VLAN
+==================
+config
+interface range ethernet g(9-16)
+switchport access vlan 2
 
 
-
+copy running-config startup-config
 
 
 
