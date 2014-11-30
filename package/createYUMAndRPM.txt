@@ -1,0 +1,7 @@
+### rpmbuild
+1. yum install rpm-build
+2. yum install redhat-rpm-config
+
+To create the RPM building environment, run the two commands below:
+1. mkdir -p ~/rpmbuild/{BUILD,RPMS,SOURCES,SPECS,SRPMS}
+2. echo '%_topdir %(echo $HOME)/rpmbuild' > ~/.rpmmacros
