@@ -1,0 +1,1 @@
+ssh vm0.ko1 "bash -s" < ./test.sh
